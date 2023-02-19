@@ -47,7 +47,9 @@ createChannel() {
 joinChannel() {
   FABRIC_CFG_PATH=$PWD/../config/
   ORG=$1
-  setGlobals $ORG
+  PORT_OF_PEER=$2
+  NUM_OF_PEER=$3
+  setGlobals $ORG $PORT_OF_PEER
 	local rc=1
 	local COUNTER=1
 	## Sometimes Join takes time, hence retry
@@ -61,7 +63,7 @@ joinChannel() {
 		COUNTER=$(expr $COUNTER + 1)
 	done
 	cat log.txt
-	verifyResult $res "After $MAX_RETRY attempts, peer0.org${ORG} has failed to join channel '$CHANNEL_NAME' "
+	verifyResult $res "After $MAX_RETRY attempts, peer${NUM_OF_PEER}.org${ORG} has failed to join channel '$CHANNEL_NAME' "
 }
 
 setAnchorPeer() {
@@ -84,15 +86,50 @@ createChannel
 successln "Channel '$CHANNEL_NAME' created"
 
 ## Join all the peers to the channel
-infoln "Joining org1 peer to the channel..."
-joinChannel 1
-infoln "Joining org2 peer to the channel..."
-joinChannel 2
+infoln "Joining org1 peer0 to the channel..."
+joinChannel 1 7051 0
+infoln "Joining org2 peer0 to the channel..."
+joinChannel 2 9051 0
+infoln "Joining org3 peer0 to the channel..."
+joinChannel 3 12051 0
+infoln "Joining org4 peer0 to the channel..."
+joinChannel 4 14051 0
+
+infoln "Joining org1 peer1 to the channel..."
+joinChannel 1 7151 1
+infoln "Joining org2 peer1 to the channel..."
+joinChannel 2 9151 1
+infoln "Joining org3 peer1 to the channel..."
+joinChannel 3 12151 1
+infoln "Joining org4 peer1 to the channel..."
+joinChannel 4 14151 1
+
+infoln "Joining org1 peer2 to the channel..."
+joinChannel 1 7251 2
+infoln "Joining org2 peer2 to the channel..."
+joinChannel 2 9251 2
+infoln "Joining org3 peer2 to the channel..."
+joinChannel 3 12251 2
+infoln "Joining org4 peer2 to the channel..."
+joinChannel 4 14251 2
+
+infoln "Joining org1 peer3 to the channel..."
+joinChannel 1 7351 3
+infoln "Joining org2 peer3 to the channel..."
+joinChannel 2 9351 3
+infoln "Joining org3 peer3 to the channel..."
+joinChannel 3 12351 3
+infoln "Joining org4 peer3 to the channel..."
+joinChannel 4 14351 3
 
 ## Set the anchor peers for each org in the channel
 infoln "Setting anchor peer for org1..."
 setAnchorPeer 1
 infoln "Setting anchor peer for org2..."
 setAnchorPeer 2
+infoln "Setting anchor peer for org3..."
+setAnchorPeer 3
+infoln "Setting anchor peer for org4..."
+setAnchorPeer 4
 
 successln "Channel '$CHANNEL_NAME' joined"
