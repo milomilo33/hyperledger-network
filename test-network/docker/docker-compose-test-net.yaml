@@ -11,6 +11,18 @@ volumes:
   peer0.org2.example.com:
   peer0.org3.example.com:
   peer0.org4.example.com:
+  peer1.org1.example.com:
+  peer1.org2.example.com:
+  peer1.org3.example.com:
+  peer1.org4.example.com:
+  peer2.org1.example.com:
+  peer2.org2.example.com:
+  peer2.org3.example.com:
+  peer2.org4.example.com:
+  peer3.org1.example.com:
+  peer3.org2.example.com:
+  peer3.org3.example.com:
+  peer3.org4.example.com:
 
 networks:
   test:
